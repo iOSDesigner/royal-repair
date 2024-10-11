@@ -27,11 +27,20 @@
         .color-options button {
             margin: 0 10px;
             padding: 10px 15px;
-            background-color: #f6921e;
+            background-color: grey; /* Standardfarbe */
             border: none;
             color: white;
             border-radius: 5px;
             cursor: pointer;
+        }
+        .color-gold {
+            background-color: #FFD700;
+        }
+        .color-silver {
+            background-color: #C0C0C0;
+        }
+        .color-black {
+            background-color: #000000;
         }
         .card-container {
             display: grid;
@@ -47,8 +56,8 @@
             text-align: left;
         }
         .card img {
-            width: 30px;
-            height: 30px;
+            width: 40px; /* Vergrößerung des Icons */
+            height: auto; /* Beibehaltung der Proportionen */
             vertical-align: middle;
             margin-right: 10px;
         }
@@ -94,6 +103,37 @@
         .cost-preview p {
             font-size: 18px;
         }
+        /* Popup Styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 500px;
+        }
+        .popup-content h2 {
+            margin-top: 0;
+        }
+        .popup-content button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f6921e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -109,44 +149,44 @@
 
 <!-- Farbauswahl -->
 <div class="color-options">
-    <button onclick="selectColor('Gold')">Gold</button>
-    <button onclick="selectColor('Silber')">Silber</button>
-    <button onclick="selectColor('Schwarz')">Schwarz</button>
+    <button class="color-gold" onclick="selectColor('Gold')">Gold</button>
+    <button class="color-silver" onclick="selectColor('Silber')">Silber</button>
+    <button class="color-black" onclick="selectColor('Schwarz')">Schwarz</button>
 </div>
 
 <!-- Defektauswahlkarten -->
 <div class="card-container">
-    <div class="card" onclick="selectDefect('Display')">
+    <div class="card" onclick="openPopup('Display')">
         <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/cracked-screen-svgrepo-com.webp" alt="Icon Display">
         <h3>Display Defekt?</h3>
         <p>Ihr Bildschirm ist gesprungen oder reagiert nicht ordnungsgemäß.</p>
         <span class="price">Ab 149€</span>
     </div>
-    <div class="card" onclick="selectDefect('Batterie')">
+    <div class="card" onclick="openPopup('Batterie')">
         <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/thunder-f-svgrepo-com.webp" alt="Icon Batterie">
         <h3>Batterie Defekt?</h3>
         <p>Die Batterie lädt nicht mehr richtig oder entlädt sich zu schnell.</p>
         <span class="price">Ab 149€</span>
     </div>
-    <div class="card" onclick="selectDefect('Mikrofon')">
+    <div class="card" onclick="openPopup('Mikrofon')">
         <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/microphone-svgrepo-com-3.webp" alt="Icon Mikrofon">
         <h3>Mikrofon Defekt?</h3>
         <p>Ihr Mikrofon funktioniert nicht richtig oder überträgt keine Töne.</p>
         <span class="price">Ab 149€</span>
     </div>
-    <div class="card" onclick="selectDefect('Lautsprecher')">
+    <div class="card" onclick="openPopup('Lautsprecher')">
         <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/speaker-wave-2-svgrepo-com.webp" alt="Icon Lautsprecher">
         <h3>Lautsprecher Defekt?</h3>
         <p>Ihr Lautsprecher gibt keinen Ton wieder oder hat Störungen.</p>
         <span class="price">Ab 149€</span>
     </div>
-    <div class="card" onclick="selectDefect('Backcover')">
+    <div class="card" onclick="openPopup('Backcover')">
         <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/speaker-wave-2-svgrepo-com.webp" alt="Icon Backcover">
         <h3>Rückseite Defekt?</h3>
         <p>Die Rückseite Ihres Geräts ist gesprungen oder beschädigt.</p>
         <span class="price">Ab 149€</span>
     </div>
-    <div class="card" onclick="selectDefect('Ladebuchse')">
+    <div class="card" onclick="openPopup('Ladebuchse')">
         <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/usb-cable-svgrepo-com.webp" alt="Icon Ladebuchse">
         <h3>Ladebuchse Defekt?</h3>
         <p>Die Ladebuchse Ihres Geräts funktioniert nicht mehr richtig.</p>
@@ -154,16 +194,15 @@
     </div>
 </div>
 
-<!-- Reparatur Optionen -->
-<div class="repair-options">
-    <h2 id="repair-title">Wählen Sie die Reparatur für Ihr Gerät</h2>
-    
-    <div id="repair-buttons" style="display:none;">
-        <h3>Reparaturoptionen für <span id="defect-type"></span>:</h3>
-        <button onclick="selectRepair('Original', 250)">Original - 250€</button>
-        <button onclick="selectRepair('Pulled', 200)">Pulled - 200€</button>
-        <button onclick="selectRepair('Refurbished', 180)">Refurbished - 180€</button>
-        <button onclick="selectRepair('Soft OLED', 150)">Soft OLED - 150€</button>
+<!-- Popup für Reparatur Auswahl -->
+<div class="popup" id="repair-popup">
+    <div class="popup-content">
+        <h2>Reparaturoptionen</h2>
+        <p id="popup-defect">Wählen Sie eine Option für den Defekt aus:</p>
+        <button onclick="selectRepair('Hersteller Original', 469)">Hersteller Original - 469€</button>
+        <button onclick="selectRepair('Original Qualität', 429)">Original Qualität - 429€</button>
+        <button onclick="selectRepair('Premium Qualität LCD/OLED', 259)">Premium Qualität LCD/OLED - 259€</button>
+        <button onclick="closePopup()">Schließen</button>
     </div>
 </div>
 
@@ -175,15 +214,19 @@
 </div>
 
 <script>
-    function selectDefect(defect) {
-        document.getElementById('repair-title').textContent = `Wählen Sie die Reparaturoptionen für ${defect}`;
-        document.getElementById('defect-type').textContent = defect;
-        document.getElementById('repair-buttons').style.display = 'block';
+    function openPopup(defect) {
+        document.getElementById('popup-defect').textContent = `Wählen Sie eine Reparaturoption für ${defect}`;
+        document.getElementById('repair-popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+        document.getElementById('repair-popup').style.display = 'none';
     }
 
     function selectRepair(repairType, cost) {
         document.getElementById('selected-repair').textContent = `${repairType} Reparatur`;
         document.getElementById('repair-cost').textContent = `Kosten: ${cost}€`;
+        closePopup();
     }
 
     function selectColor(color) {
