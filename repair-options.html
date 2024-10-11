@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wählen Sie die Reparaturoptionen und sehen Sie den Preis.">
+    <meta name="keywords" content="Smartphone Reparatur, Displaytausch, Royal Repair">
+    <title>Royal Repair - Reparatur Optionen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Royal Repair - Reparatur Optionen</h1>
+</header>
+
+<nav>
+    <a href="index.html">Startseite</a>
+    <a href="about.html">Über Uns</a>
+    <a href="services.html">Dienstleistungen</a>
+    <a href="contact.html">Kontakt</a>
+</nav>
+
+<!-- Reparatur Optionen -->
+<div class="repair-options">
+    <h2>Wählen Sie die Reparatur für Ihr <span id="phone-model"></span> in <span id="phone-color"></span></h2>
+    
+    <h3>Display Reparatur</h3>
+    <button onclick="selectRepair('Original Display', 250)">Original Display - 250€</button>
+    <button onclick="selectRepair('Pulled Display', 200)">Pulled Display - 200€</button>
+    <button onclick="selectRepair('Refurbished Display', 180)">Refurbished Display - 180€</button>
+    <button onclick="selectRepair('Soft OLED', 150)">Soft OLED - 150€</button>
+    
+    <h3>Andere Reparaturen</h3>
+</div>
+
+<!-- Kostenvorschau -->
+<div class="cost-preview">
+    <h3>Ausgewählte Reparatur:</h3>
+    <p id="selected-repair">Keine Reparatur ausgewählt</p>
+    <p id="repair-cost">Kosten: 0€</p>
+</div>
+
+<script>
+    function getPhoneDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const phoneModel = urlParams.get('phoneModel');
+        const color = urlParams.get('color');
+        document.getElementById('phone-model').textContent = phoneModel;
+        document.getElementById('phone-color').textContent = color;
+    }
+
+    function selectRepair(repairType, cost) {
+        document.getElementById('selected-repair').textContent = repairType;
+        document.getElementById('repair-cost').textContent = `Kosten: ${cost}€`;
+    }
+
+    window.onload = getPhoneDetails;
+</script>
+
+<footer>
+    <p>© 2024 Royal Repair. Alle Rechte vorbehalten.</p>
+</footer>
+
+</body>
+</html>
