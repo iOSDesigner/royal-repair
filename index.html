@@ -112,4 +112,71 @@
 
 <!-- Schrittanzeige und Suchleiste -->
 <div class="stepper">
-    <div class="step active">1
+    <div class="step active">1</div>
+    <div class="step">2</div>
+    <div class="step">3</div>
+</div>
+
+<!-- Suchleiste -->
+<div class="search-container">
+    <div class="search-box">
+        <input type="text" placeholder="Geben Sie Ihren Hersteller bzw. Marke, Modell oder Modellnummer bzw. Modellcode ein.">
+        <button onclick="openPhoneSelection()">🔍</button>
+    </div>
+</div>
+
+<script>
+    function openPhoneSelection() {
+        const phoneModel = document.querySelector('.search-box input').value;
+        if (phoneModel) {
+            window.location.href = `color-selection.html?phoneModel=${phoneModel}`;
+        } else {
+            alert('Bitte geben Sie ein Smartphone-Modell ein');
+        }
+    }
+</script>
+
+<div class="services">
+    <h2>Unsere Dienstleistungen</h2>
+    <p>Wir bieten Reparaturen für Smartphones, Tablets, Smartwatches und vieles mehr an.</p>
+    <p>Displaybruch, Akkutausch, Wasserschäden – alles kein Problem!</p>
+</div>
+
+<!-- Google Maps Integration -->
+<div class="map-container">
+    <div style="max-width:100%;overflow:hidden;color:red;width:500px;height:500px;">
+        <div id="embed-ded-map-canvas" style="height:100%; width:100%;max-width:100%;">
+            <iframe style="height:100%;width:100%;border:0;" frameborder="0" 
+                src="https://www.google.com/maps/embed/v1/place?q=Bahnhofstraße+16+75428+Illingen&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8">
+            </iframe>
+        </div>
+        <style>#embed-ded-map-canvas img.text-marker{max-width:none!important;background:none!important;}img{max-width:none}</style>
+    </div>
+</div>
+
+<!-- Kundenbewertungen -->
+<div class="reviews">
+    <h2>Kundenbewertungen</h2>
+
+    <div class="review">
+        <h3>Max Mustermann</h3>
+        <p>"Hervorragender Service! Mein Handy war in kürzester Zeit repariert. Sehr zu empfehlen!"</p>
+    </div>
+
+    <div class="review">
+        <h3>Lisa Müller</h3>
+        <p>"Sehr freundliches Team, schnelle Reparatur und faire Preise. Gerne wieder!"</p>
+    </div>
+
+    <div class="review">
+        <h3>Paul Schmidt</h3>
+        <p>"Die Reparatur meines Tablets verlief problemlos und schnell. Super Arbeit!"</p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2024 Royal Repair. Alle Rechte vorbehalten.</p>
+</footer>
+
+</body>
+</html>
