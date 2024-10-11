@@ -5,33 +5,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Wählen Sie die Reparaturoptionen und sehen Sie den Preis.">
     <meta name="keywords" content="Smartphone Reparatur, Displaytausch, Royal Repair">
-    <title>Royal Repair - Reparatur Optionen</title>
+    <title>Royal Repair - Defektauswahl & Reparatur Optionen</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .card {
+            border: 2px solid #f6921e;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .card h3 {
+            color: #f6921e;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 14px;
+            color: #333;
+        }
+        .card .price {
+            background-color: #5ed56f;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .repair-options {
+            padding: 20px;
+        }
+        .repair-options h3 {
+            margin-top: 20px;
+        }
+        .repair-options button {
+            margin-right: 10px;
+            padding: 10px 15px;
+            background-color: #f6921e;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cost-preview {
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .cost-preview p {
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
 
 <header>
-    <h1>Royal Repair - Reparatur Optionen</h1>
+    <h1>Royal Repair - Defektauswahl & Reparatur Optionen</h1>
 </header>
 
-<nav>
-    <a href="index.html">Startseite</a>
-    <a href="about.html">Über Uns</a>
-    <a href="services.html">Dienstleistungen</a>
-    <a href="contact.html">Kontakt</a>
-</nav>
+<!-- Defektauswahlkarten -->
+<div class="card-container">
+    <div class="card" onclick="selectDefect('Display')">
+        <h3>Display Defekt?</h3>
+        <p>Ihr Bildschirm ist gesprungen oder reagiert nicht ordnungsgemäß.</p>
+        <span class="price">Ab 149€</span>
+    </div>
+    <div class="card" onclick="selectDefect('Batterie')">
+        <h3>Batterie Defekt?</h3>
+        <p>Die Batterie lädt nicht mehr richtig oder entlädt sich zu schnell.</p>
+        <span class="price">Ab 149€</span>
+    </div>
+    <div class="card" onclick="selectDefect('Rückseite')">
+        <h3>Rückseite Defekt?</h3>
+        <p>Die Rückseite Ihres Geräts ist gesprungen oder beschädigt.</p>
+        <span class="price">Ab 149€</span>
+    </div>
+</div>
 
 <!-- Reparatur Optionen -->
 <div class="repair-options">
-    <h2>Wählen Sie die Reparatur für Ihr <span id="phone-model"></span> in <span id="phone-color"></span></h2>
+    <h2 id="repair-title">Wählen Sie die Reparatur für Ihr Gerät</h2>
     
-    <h3>Display Reparatur</h3>
-    <button onclick="selectRepair('Original Display', 250)">Original Display - 250€</button>
-    <button onclick="selectRepair('Pulled Display', 200)">Pulled Display - 200€</button>
-    <button onclick="selectRepair('Refurbished Display', 180)">Refurbished Display - 180€</button>
-    <button onclick="selectRepair('Soft OLED', 150)">Soft OLED - 150€</button>
-    
-    <h3>Andere Reparaturen</h3>
+    <div id="repair-buttons" style="display:none;">
+        <h3>Reparaturoptionen für <span id="defect-type"></span>:</h3>
+        <button onclick="selectRepair('Original', 250)">Original - 250€</button>
+        <button onclick="selectRepair('Pulled', 200)">Pulled - 200€</button>
+        <button onclick="selectRepair('Refurbished', 180)">Refurbished - 180€</button>
+        <button onclick="selectRepair('Soft OLED', 150)">Soft OLED - 150€</button>
+    </div>
 </div>
 
 <!-- Kostenvorschau -->
@@ -42,20 +113,16 @@
 </div>
 
 <script>
-    function getPhoneDetails() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const phoneModel = urlParams.get('phoneModel');
-        const color = urlParams.get('color');
-        document.getElementById('phone-model').textContent = phoneModel;
-        document.getElementById('phone-color').textContent = color;
+    function selectDefect(defect) {
+        document.getElementById('repair-title').textContent = `Wählen Sie die Reparaturoptionen für ${defect}`;
+        document.getElementById('defect-type').textContent = defect;
+        document.getElementById('repair-buttons').style.display = 'block';
     }
 
     function selectRepair(repairType, cost) {
-        document.getElementById('selected-repair').textContent = repairType;
+        document.getElementById('selected-repair').textContent = `${repairType} Reparatur`;
         document.getElementById('repair-cost').textContent = `Kosten: ${cost}€`;
     }
-
-    window.onload = getPhoneDetails;
 </script>
 
 <footer>
