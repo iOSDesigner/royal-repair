@@ -8,7 +8,6 @@
     <meta name="author" content="Royal Repair">
     <title>Royal Repair - Professionelle Handy- und Tablet-Reparaturen in Illingen</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Strukturierte Daten (Schema Markup) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -59,6 +58,24 @@
 <div class="image-container">
     <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/TitelBild.webp" alt="Royal Repair Werkstatt in Illingen">
 </div>
+
+<!-- Smartphone-Suchleiste für die Reparaturauswahl -->
+<div class="search-section">
+    <h2>Wählen Sie Ihr Smartphone</h2>
+    <input type="text" id="phone-search" placeholder="z.B. iPhone 12 Pro">
+    <button onclick="openPhoneSelection()">Weiter</button>
+</div>
+
+<script>
+    function openPhoneSelection() {
+        const phoneModel = document.getElementById('phone-search').value;
+        if (phoneModel) {
+            window.location.href = `color-selection.html?phoneModel=${phoneModel}`;
+        } else {
+            alert('Bitte geben Sie ein Smartphone-Modell ein');
+        }
+    }
+</script>
 
 <div class="services">
     <h2>Unsere Dienstleistungen</h2>
