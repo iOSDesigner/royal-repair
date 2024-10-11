@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wählen Sie die Farbe Ihres Smartphones aus, um die Reparaturdetails zu sehen.">
+    <meta name="keywords" content="Smartphone Reparatur, iPhone, Farbwahl, Royal Repair">
+    <title>Royal Repair - Farbwahl</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Royal Repair - Farbwahl</h1>
+</header>
+
+<nav>
+    <a href="index.html">Startseite</a>
+    <a href="about.html">Über Uns</a>
+    <a href="services.html">Dienstleistungen</a>
+    <a href="contact.html">Kontakt</a>
+</nav>
+
+<!-- Farbwahl basierend auf dem Modell -->
+<div class="color-selection">
+    <h2>Wählen Sie die Farbe für Ihr <span id="phone-model"></span></h2>
+    <button onclick="selectColor('Schwarz')">Schwarz</button>
+    <button onclick="selectColor('Weiß')">Weiß</button>
+    <button onclick="selectColor('Blau')">Blau</button>
+</div>
+
+<script>
+    function getPhoneModel() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const phoneModel = urlParams.get('phoneModel');
+        document.getElementById('phone-model').textContent = phoneModel;
+    }
+
+    function selectColor(color) {
+        const phoneModel = document.getElementById('phone-model').textContent;
+        window.location.href = `repair-options.html?phoneModel=${phoneModel}&color=${color}`;
+    }
+
+    window.onload = getPhoneModel;
+</script>
+
+<footer>
+    <p>© 2024 Royal Repair. Alle Rechte vorbehalten.</p>
+</footer>
+
+</body>
+</html>
