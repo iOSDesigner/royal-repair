@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kontaktieren Sie Royal Repair für professionelle Reparaturen von Smartphones, Tablets und Smartwatches in Illingen.">
-    <meta name="keywords" content="Kontakt, Handy Reparatur Illingen, Tablet Reparatur Illingen, Smartwatch Reparatur, Technik Reparatur">
+    <meta name="keywords" content="Kontakt, Handy Reparatur Illingen, Tablet Reparatur Illingen, Smartwatch Reparatur, Technik Reparatur, Terminbuchung">
     <meta name="author" content="Royal Repair">
     <title>Kontakt - Royal Repair Illingen</title>
     <style>
@@ -46,6 +46,17 @@
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+        }
+        .contact button {
+            background-color: #f6921e;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .contact button:hover {
+            background-color: #231f20;
         }
         .map-container {
             margin: 20px auto;
@@ -95,12 +106,15 @@
 </nav>
 
 <div class="contact">
-    <h2>Kontakt</h2>
+    <h2>Kontakt / Terminbuchung</h2>
     <form action="mailto:info@deine-website.de" method="POST" enctype="text/plain">
         <input type="text" name="name" placeholder="Dein Name" required>
         <input type="email" name="email" placeholder="Deine E-Mail" required>
-        <textarea name="message" placeholder="Deine Nachricht" rows="5" required></textarea>
-        <button type="submit">Absenden</button>
+        <input type="tel" name="phone" placeholder="Deine Telefonnummer" required>
+        <input type="text" name="device" placeholder="Dein Gerät (z.B. iPhone 12, Samsung Galaxy S21)" required>
+        <input type="date" name="date" placeholder="Gewünschtes Datum" required>
+        <textarea name="message" placeholder="Zusätzliche Informationen" rows="5"></textarea>
+        <button type="submit">Termin anfragen</button>
     </form>
 </div>
 
@@ -109,4 +123,16 @@
     <div style="max-width:100%;overflow:hidden;color:red;width:500px;height:500px;">
         <div id="embed-ded-map-canvas" style="height:100%; width:100%;max-width:100%;">
             <iframe style="height:100%;width:100%;border:0;" frameborder="0" 
-                src="https://www.google.com/maps/embed/v1/place?q=Bahnhofstraße+16+75428+Illingen&key=AIzaSyBFw0Qbyq9zTFTd-tUY6d
+                src="https://www.google.com/maps/embed/v1/place?q=Bahnhofstraße+16+75428+Illingen&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8">
+            </iframe>
+        </div>
+        <style>#embed-ded-map-canvas img.text-marker{max-width:none!important;background:none!important;}img{max-width:none}</style>
+    </div>
+</div>
+
+<footer>
+    <p>© 2024 Royal Repair. Alle Rechte vorbehalten.</p>
+</footer>
+
+</body>
+</html>
