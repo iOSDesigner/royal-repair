@@ -11,6 +11,28 @@
         body {
             font-family: Arial, sans-serif;
         }
+        .model-image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .model-image-container img {
+            max-width: 200px;
+            height: auto;
+        }
+        .color-options {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .color-options button {
+            margin: 0 10px;
+            padding: 10px 15px;
+            background-color: #f6921e;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         .card-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -24,8 +46,15 @@
             box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
             text-align: left;
         }
+        .card img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
         .card h3 {
             color: #f6921e;
+            display: inline-block;
             margin-bottom: 10px;
         }
         .card p {
@@ -73,19 +102,34 @@
     <h1>Royal Repair - Defektauswahl & Reparatur Optionen</h1>
 </header>
 
+<!-- Modellbild -->
+<div class="model-image-container">
+    <img src="https://via.placeholder.com/200" alt="Modell Bild">
+</div>
+
+<!-- Farbauswahl -->
+<div class="color-options">
+    <button onclick="selectColor('Gold')">Gold</button>
+    <button onclick="selectColor('Silber')">Silber</button>
+    <button onclick="selectColor('Schwarz')">Schwarz</button>
+</div>
+
 <!-- Defektauswahlkarten -->
 <div class="card-container">
     <div class="card" onclick="selectDefect('Display')">
+        <img src="https://via.placeholder.com/30" alt="Icon Display">
         <h3>Display Defekt?</h3>
         <p>Ihr Bildschirm ist gesprungen oder reagiert nicht ordnungsgemäß.</p>
         <span class="price">Ab 149€</span>
     </div>
     <div class="card" onclick="selectDefect('Batterie')">
+        <img src="https://via.placeholder.com/30" alt="Icon Batterie">
         <h3>Batterie Defekt?</h3>
         <p>Die Batterie lädt nicht mehr richtig oder entlädt sich zu schnell.</p>
         <span class="price">Ab 149€</span>
     </div>
     <div class="card" onclick="selectDefect('Rückseite')">
+        <img src="https://via.placeholder.com/30" alt="Icon Rückseite">
         <h3>Rückseite Defekt?</h3>
         <p>Die Rückseite Ihres Geräts ist gesprungen oder beschädigt.</p>
         <span class="price">Ab 149€</span>
@@ -123,6 +167,10 @@
         document.getElementById('selected-repair').textContent = `${repairType} Reparatur`;
         document.getElementById('repair-cost').textContent = `Kosten: ${cost}€`;
     }
+
+    function selectColor(color) {
+        alert(`Sie haben die Farbe ${color} gewählt.`);
+    }
 </script>
 
 <footer>
@@ -131,4 +179,3 @@
 
 </body>
 </html>
-
