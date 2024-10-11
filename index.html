@@ -8,40 +8,29 @@
     <meta name="author" content="Royal Repair">
     <title>Royal Repair - Professionelle Handy- und Tablet-Reparaturen in Illingen</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Royal Repair",
-      "image": "https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/TitelBild.webp",
-      "@id": "",
-      "url": "https://www.royal-repair.de",
-      "telephone": "01739153644",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Bahnhofstraße 16",
-        "addressLocality": "Illingen",
-        "postalCode": "75428",
-        "addressCountry": "DE"
-      },
-      "openingHours": "Mo-Fr 10:00-20:00, Sa 10:00-14:00",
-      "priceRange": "$$",
-      "description": "Royal Repair bietet professionelle Reparaturen von Smartphones, Tablets und Smartwatches in Illingen an. Schnelle und zuverlässige Dienstleistungen zu fairen Preisen.",
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 48.895002,
-        "longitude": 8.927554
-      }
-    }
-    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
         }
+        h1, h2, p {
+            text-align: center;
+        }
+        .banner {
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .image-container {
+            text-align: center;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
         .stepper {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin: 20px 0;
         }
         .step {
             width: 40px;
@@ -53,6 +42,7 @@
             justify-content: center;
             align-items: center;
             margin: 0 10px;
+            font-size: 1.2em;
         }
         .step.active {
             background-color: #5ed56f;
@@ -60,17 +50,19 @@
         .search-container {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin: 20px 0;
         }
         .search-box {
-            width: 60%;
+            position: relative;
+            width: 50%;
             display: flex;
             border-radius: 50px;
             border: 2px solid #f6921e;
             padding: 10px;
+            background-color: white;
         }
         .search-box input {
-            flex-grow: 1;
+            width: 100%;
             border: none;
             outline: none;
             padding-left: 15px;
@@ -84,19 +76,13 @@
             border-radius: 50px;
             cursor: pointer;
         }
-        /* Styling für die Suchleiste */
         .autocomplete-container {
-            position: relative;
-            width: 50%;
-            margin: 20px auto;
-        }
-        .autocomplete-list {
             position: absolute;
             top: 100%;
             left: 0;
             width: 100%;
-            border: 1px solid #ccc;
             background-color: white;
+            border: 1px solid #ccc;
             max-height: 150px;
             overflow-y: auto;
             z-index: 1000;
@@ -104,13 +90,18 @@
         .autocomplete-item {
             padding: 10px;
             cursor: pointer;
+            border-bottom: 1px solid #f4f4f4;
         }
         .autocomplete-item:hover {
             background-color: #eee;
         }
-        .image-container img {
-            width: 100%;
-            height: auto;
+        .services, .reviews {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .map-container {
+            text-align: center;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -127,25 +118,28 @@
     <a href="contact.html">Kontakt</a>
 </nav>
 
-<!-- Suchleiste über dem Titelbild -->
-<h2>Welches Modell haben Sie?</h2>
-<p>Geben Sie Ihren Hersteller, Marke, Modell oder Modellnummer ein:</p>
-
-<div class="autocomplete-container">
-    <input type="text" id="phone-input" placeholder="z.B. iPhone 14 Pro" oninput="showSuggestions(this.value)">
-    <div id="suggestions" class="autocomplete-list"></div>
-</div>
-
-<!-- Titelbild Integration mit ALT-Text -->
-<div class="image-container">
-    <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/TitelBild.webp" alt="Royal Repair Werkstatt in Illingen">
-</div>
-
 <!-- Schrittanzeige -->
 <div class="stepper">
     <div class="step active">1</div>
     <div class="step">2</div>
     <div class="step">3</div>
+</div>
+
+<!-- Suchleiste -->
+<h2>Welches Modell haben Sie?</h2>
+<p>Geben Sie Ihren Hersteller, Marke, Modell oder Modellnummer ein:</p>
+
+<div class="search-container">
+    <div class="search-box">
+        <input type="text" id="phone-input" placeholder="z.B. iPhone 14 Pro" oninput="showSuggestions(this.value)">
+        <div id="suggestions" class="autocomplete-container"></div>
+        <button onclick="openPhoneSelection()">🔍</button>
+    </div>
+</div>
+
+<!-- Titelbild Integration mit ALT-Text -->
+<div class="image-container">
+    <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/TitelBild.webp" alt="Royal Repair Werkstatt in Illingen">
 </div>
 
 <!-- Dienstleistungen -->
@@ -214,7 +208,15 @@
     function selectModel(model) {
         document.getElementById('phone-input').value = model;
         document.getElementById('suggestions').innerHTML = '';
-        // Hier könntest du den nächsten Schritt auslösen, z.B. den Benutzer auf die nächste Seite weiterleiten.
+    }
+
+    function openPhoneSelection() {
+        const phoneModel = document.getElementById('phone-input').value;
+        if (phoneModel) {
+            window.location.href = `repair-options.html?phoneModel=${phoneModel}`;
+        } else {
+            alert('Bitte geben Sie ein Smartphone-Modell ein');
+        }
     }
 </script>
 
