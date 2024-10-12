@@ -117,20 +117,31 @@
         .price-list-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
+            position: relative;
         }
-        .price-list-item span {
-            font-size: 18px;
+        .price-list-item img {
+            width: 20px;
+            height: auto;
+            cursor: pointer;
+            position: absolute;
+            left: -30px;
         }
         .price-list-item .price {
-            background-color: #5ed56f;
-            padding: 5px 10px;
-            border-radius: 5px;
+            background-image: url('preis.webp');
+            background-size: cover;
+            padding: 5px 15px;
             color: white;
             font-weight: bold;
+            border-radius: 5px;
         }
         .total-section {
             margin-top: 20px;
+            background-image: url('trennlinie.webp');
+            background-repeat: no-repeat;
+            background-position: bottom;
+            padding-bottom: 20px;
         }
         .total-section .total-item {
             display: flex;
@@ -138,14 +149,16 @@
             font-size: 18px;
             margin-bottom: 10px;
         }
-        .total-section .next-step {
-            background-color: #5ed56f;
+        .next-step {
+            background-image: url('Eingabefeld Nächster schritt.webp');
+            background-size: cover;
             color: white;
             text-align: center;
             padding: 15px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            margin-top: 20px;
         }
         footer {
             background-color: #231f20;
@@ -258,8 +271,17 @@
         const priceList = document.getElementById('price-list');
         const newItem = document.createElement('div');
         newItem.classList.add('price-list-item');
-        newItem.innerHTML = `<span>${repairName}</span><span class="price">${cost}€</span>`;
+        newItem.innerHTML = `<img src="close.webp" onclick="removeRepairOption(this, ${cost})"> <span>${repairName}</span><span class="price">${cost}€</span>`;
         priceList.appendChild(newItem);
+    }
+
+    function removeRepairOption(element, cost) {
+        totalCost -= cost;
+        document.getElementById('subtotal').textContent = totalCost + "€";
+        document.getElementById('total').textContent = totalCost + "€";
+
+        const item = element.parentElement;
+        item.remove();
     }
 </script>
 
