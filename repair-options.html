@@ -229,7 +229,17 @@
                 <span class="price">Ab 149€</span>
             </div>
         </div>
+   <!-- Popup für Reparatur Auswahl -->
+<div class="popup" id="repair-popup">
+    <div class="popup-content">
+        <h2>Reparaturoptionen</h2>
+        <p id="popup-defect">Wählen Sie eine Option für den Defekt aus:</p>
+        <button onclick="selectRepair('Hersteller Original', 359)">Hersteller Original - 359€</button>
+        <button onclick="selectRepair('Original Qualität', 249)">Original Qualität - 249€</button>
+        <button onclick="selectRepair('Premium Qualität LCD/OLED', 179)">Premium Qualität LCD/OLED - 179€</button>
+        <button onclick="closePopup()">Schließen</button>
     </div>
+</div>
 
     <div class="right-section fixed-price">
         <h2>Reparaturliste</h2>
