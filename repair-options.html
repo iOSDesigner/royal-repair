@@ -20,14 +20,14 @@
             height: auto;
         }
         .color-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Zwei Spalten für die Farben */
-            justify-content: start;
+            display: flex;
+            justify-content: left;
             margin: 10px 0;
-            width: 50%; /* Halbe Seite */
+            width: 30%; /* Festlegen der Breite für das Layout wie in deinem zweiten Bild */
+            flex-wrap: wrap; /* Flex-Wrap für bessere Anzeige */
         }
         .color-options button {
-            margin: 0 10px;
+            margin: 0 10px 10px 0;
             padding: 10px 15px;
             background-color: grey; /* Standardfarbe */
             border: none;
