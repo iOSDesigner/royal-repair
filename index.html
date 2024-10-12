@@ -69,9 +69,9 @@
             font-size: 18px;
         }
         .search-box button {
-            background-color: #f6921e;
+            background-color: transparent;
             border: none;
-            padding: 10px 20px;
+            padding: 10px;
             color: white;
             border-radius: 50px;
             cursor: pointer;
@@ -133,7 +133,9 @@
     <div class="search-box">
         <input type="text" id="phone-input" placeholder="z.B. iPhone 14 Pro" oninput="showSuggestions(this.value)">
         <div id="suggestions" class="autocomplete-container"></div>
-        <button onclick="openPhoneSelection()">🔍</button>
+        <button onclick="openPhoneSelection()">
+            <img src="Suchen.webp" alt="Lupe Icon" width="30" height="30">
+        </button>
     </div>
 </div>
 
