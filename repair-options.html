@@ -20,9 +20,11 @@
             height: auto;
         }
         .color-options {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Zwei Spalten für die Farben */
+            justify-content: start;
             margin: 10px 0;
+            width: 50%; /* Halbe Seite */
         }
         .color-options button {
             margin: 0 10px;
@@ -35,22 +37,19 @@
         }
         /* Spezifische Farben für das iPhone 14 Plus */
         .color-midnight {
-            background-color: #000000; /* Mitternacht (Schwarz) */
+            background-color: #343b43; /* Mitternacht */
         }
         .color-polarstern {
-            background-color: #F8F8FF; /* Polarstern (Weiß) */
+            background-color: #faf7f2; /* Polarstern */
         }
         .color-blau {
-            background-color: #1C75BC; /* Blau */
-        }
-        .color-violett {
-            background-color: #8A2BE2; /* Violett */
+            background-color: #a9bacc; /* Blau */
         }
         .color-red {
-            background-color: #FF0000; /* Red (PRODUCT RED) */
+            background-color: #fb1230; /* Red (PRODUCT RED) */
         }
-        .color-gelb {
-            background-color: #FFD700; /* Gelb */
+        .color-violett {
+            background-color: #e5ddea; /* Violett */
         }
         .card-container {
             display: grid;
@@ -164,7 +163,6 @@
     <button class="color-blau" onclick="selectColor('Blau')">Blau</button>
     <button class="color-violett" onclick="selectColor('Violett')">Violett</button>
     <button class="color-red" onclick="selectColor('Red')">Red</button>
-    <button class="color-gelb" onclick="selectColor('Gelb')">Gelb</button>
 </div>
 
 <!-- Defektauswahlkarten -->
