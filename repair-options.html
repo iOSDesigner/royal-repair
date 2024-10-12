@@ -22,17 +22,15 @@
         .color-options {
             display: flex;
             justify-content: left;
+            gap: 10px;
             margin: 10px 0;
-            width: 30%; /* Festlegen der Breite für das Layout wie in deinem zweiten Bild */
-            flex-wrap: wrap; /* Flex-Wrap für bessere Anzeige */
+            width: 100%;
         }
         .color-options button {
-            margin: 0 10px 10px 0;
-            padding: 10px 15px;
-            background-color: grey; /* Standardfarbe */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             border: none;
-            color: white;
-            border-radius: 5px;
             cursor: pointer;
         }
         /* Spezifische Farben für das iPhone 14 Plus */
@@ -158,11 +156,11 @@
 
 <!-- Farbauswahl -->
 <div class="color-options">
-    <button class="color-midnight" onclick="selectColor('Mitternacht')">Mitternacht</button>
-    <button class="color-polarstern" onclick="selectColor('Polarstern')">Polarstern</button>
-    <button class="color-blau" onclick="selectColor('Blau')">Blau</button>
-    <button class="color-violett" onclick="selectColor('Violett')">Violett</button>
-    <button class="color-red" onclick="selectColor('Red')">Red</button>
+    <button class="color-midnight" onclick="selectColor('Mitternacht')" title="Mitternacht"></button>
+    <button class="color-polarstern" onclick="selectColor('Polarstern')" title="Polarstern"></button>
+    <button class="color-blau" onclick="selectColor('Blau')" title="Blau"></button>
+    <button class="color-red" onclick="selectColor('Red')" title="Red"></button>
+    <button class="color-violett" onclick="selectColor('Violett')" title="Violett"></button>
 </div>
 
 <!-- Defektauswahlkarten -->
