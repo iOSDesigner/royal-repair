@@ -10,6 +10,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between; /* Verteilung der beiden Abschnitte */
+            margin: 0;
+            padding: 20px;
+        }
+        .left-section, .right-section {
+            width: 48%;
         }
         .model-image-container {
             text-align: center;
@@ -86,140 +93,149 @@
             display: inline-block;
             margin-top: 10px;
         }
-        .repair-options {
-            padding: 20px;
-        }
-        .repair-options h3 {
-            margin-top: 20px;
-        }
-        .repair-options button {
-            margin-right: 10px;
-            padding: 10px 15px;
-            background-color: #f6921e;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .cost-preview {
-            padding: 20px;
+        /* Rechte Seite für die Preisliste */
+        .right-section {
             background-color: #f4f4f4;
+            padding: 20px;
             border-radius: 10px;
-            margin-top: 20px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
         }
-        .cost-preview p {
+        .right-section h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .price-list {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .price-list-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .price-list-item span {
             font-size: 18px;
         }
-        /* Popup Styling */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-        .popup-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 500px;
-        }
-        .popup-content h2 {
-            margin-top: 0;
-        }
-        .popup-content button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #f6921e;
+        .price-list-item .price {
+            background-color: #5ed56f;
+            padding: 5px 10px;
+            border-radius: 5px;
             color: white;
-            border: none;
+            font-weight: bold;
+        }
+        .total-section {
+            margin-top: 20px;
+        }
+        .total-section .total-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .total-section .next-step {
+            background-color: #5ed56f;
+            color: white;
+            text-align: center;
+            padding: 15px;
             border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Royal Repair - Defektauswahl & Reparatur Optionen</h1>
-</header>
+<div class="left-section">
+    <!-- Modellbild -->
+    <div class="model-image-container">
+        <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/iPhone%2014%20Plus.webp" alt="iPhone 14 Plus">
+    </div>
 
-<!-- Modellbild -->
-<div class="model-image-container">
-    <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/iPhone%2014%20Plus.webp" alt="iPhone 14 Plus">
-</div>
+    <!-- Farbauswahl -->
+    <div class="color-options">
+        <button class="color-midnight" onclick="selectColor('Mitternacht')" title="Mitternacht"></button>
+        <button class="color-polarstern" onclick="selectColor('Polarstern')" title="Polarstern"></button>
+        <button class="color-blau" onclick="selectColor('Blau')" title="Blau"></button>
+        <button class="color-red" onclick="selectColor('Red')" title="Red"></button>
+        <button class="color-violett" onclick="selectColor('Violett')" title="Violett"></button>
+    </div>
 
-<!-- Farbauswahl -->
-<div class="color-options">
-    <button class="color-midnight" onclick="selectColor('Mitternacht')" title="Mitternacht"></button>
-    <button class="color-polarstern" onclick="selectColor('Polarstern')" title="Polarstern"></button>
-    <button class="color-blau" onclick="selectColor('Blau')" title="Blau"></button>
-    <button class="color-red" onclick="selectColor('Red')" title="Red"></button>
-    <button class="color-violett" onclick="selectColor('Violett')" title="Violett"></button>
-</div>
-
-<!-- Defektauswahlkarten -->
-<div class="card-container">
-    <div class="card" onclick="openPopup('Display')">
-        <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/cracked-screen-svgrepo-com.webp" alt="Icon Display">
-        <h3>Display Defekt?</h3>
-        <p>Ihr Bildschirm ist gesprungen oder reagiert nicht ordnungsgemäß.</p>
-        <span class="price">Ab 149€</span>
-    </div>
-    <div class="card" onclick="openPopup('Batterie')">
-        <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/thunder-f-svgrepo-com.webp" alt="Icon Batterie">
-        <h3>Batterie Defekt?</h3>
-        <p>Die Batterie lädt nicht mehr richtig oder entlädt sich zu schnell.</p>
-        <span class="price">Ab 149€</span>
-    </div>
-    <div class="card" onclick="openPopup('Mikrofon')">
-        <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/microphone-svgrepo-com-3.webp" alt="Icon Mikrofon">
-        <h3>Mikrofon Defekt?</h3>
-        <p>Ihr Mikrofon funktioniert nicht richtig oder überträgt keine Töne.</p>
-        <span class="price">Ab 149€</span>
-    </div>
-    <div class="card" onclick="openPopup('Lautsprecher')">
-        <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/speaker-wave-2-svgrepo-com.webp" alt="Icon Lautsprecher">
-        <h3>Lautsprecher Defekt?</h3>
-        <p>Ihr Lautsprecher gibt keinen Ton wieder oder hat Störungen.</p>
-        <span class="price">Ab 149€</span>
-    </div>
-    <div class="card" onclick="openPopup('Backcover')">
-        <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/speaker-wave-2-svgrepo-com.webp" alt="Icon Backcover">
-        <h3>Rückseite Defekt?</h3>
-        <p>Die Rückseite Ihres Geräts ist gesprungen oder beschädigt.</p>
-        <span class="price">Ab 149€</span>
-    </div>
-    <div class="card" onclick="openPopup('Ladebuchse')">
-        <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/usb-cable-svgrepo-com.webp" alt="Icon Ladebuchse">
-        <h3>Ladebuchse Defekt?</h3>
-        <p>Die Ladebuchse Ihres Geräts funktioniert nicht mehr richtig.</p>
-        <span class="price">Ab 149€</span>
-    </div>
-</div>
-
-<!-- Popup für Reparatur Auswahl -->
-<div class="popup" id="repair-popup">
-    <div class="popup-content">
-        <h2>Reparaturoptionen</h2>
-        <p id="popup-defect">Wählen Sie eine Option für den Defekt aus:</p>
-        <button onclick="selectRepair('Hersteller Original', 469)">Hersteller Original - 469€</button>
-        <button onclick="selectRepair('Original Qualität', 429)">Original Qualität - 429€</button>
-        <button onclick="selectRepair('Premium Qualität LCD/OLED', 259)">Premium Qualität LCD/OLED - 259€</button>
-        <button onclick="closePopup()">Schließen</button>
+    <!-- Defektauswahlkarten -->
+    <div class="card-container">
+        <div class="card" onclick="openPopup('Display')">
+            <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/cracked-screen-svgrepo-com.webp" alt="Icon Display">
+            <h3>Display Defekt?</h3>
+            <p>Ihr Bildschirm ist gesprungen oder reagiert nicht ordnungsgemäß.</p>
+            <span class="price">Ab 149€</span>
+        </div>
+        <div class="card" onclick="openPopup('Batterie')">
+            <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/thunder-f-svgrepo-com.webp" alt="Icon Batterie">
+            <h3>Batterie Defekt?</h3>
+            <p>Die Batterie lädt nicht mehr richtig oder entlädt sich zu schnell.</p>
+            <span class="price">Ab 149€</span>
+        </div>
+        <div class="card" onclick="openPopup('Mikrofon')">
+            <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/microphone-svgrepo-com-3.webp" alt="Icon Mikrofon">
+            <h3>Mikrofon Defekt?</h3>
+            <p>Ihr Mikrofon funktioniert nicht richtig oder überträgt keine Töne.</p>
+            <span class="price">Ab 149€</span>
+        </div>
+        <div class="card" onclick="openPopup('Lautsprecher')">
+            <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/speaker-wave-2-svgrepo-com.webp" alt="Icon Lautsprecher">
+            <h3>Lautsprecher Defekt?</h3>
+            <p>Ihr Lautsprecher gibt keinen Ton wieder oder hat Störungen.</p>
+            <span class="price">Ab 149€</span>
+        </div>
+        <div class="card" onclick="openPopup('Backcover')">
+            <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/speaker-wave-2-svgrepo-com.webp" alt="Icon Backcover">
+            <h3>Rückseite Defekt?</h3>
+            <p>Die Rückseite Ihres Geräts ist gesprungen oder beschädigt.</p>
+            <span class="price">Ab 149€</span>
+        </div>
+        <div class="card" onclick="openPopup('Ladebuchse')">
+            <img src="https://raw.githubusercontent.com/iOSDesigner/royal-repair/refs/heads/main/images/usb-cable-svgrepo-com.webp" alt="Icon Ladebuchse">
+            <h3>Ladebuchse Defekt?</h3>
+            <p>Die Ladebuchse Ihres Geräts funktioniert nicht mehr richtig.</p>
+            <span class="price">Ab 149€</span>
+        </div>
     </div>
 </div>
 
-<!-- Kostenvorschau -->
-<div class="cost-preview">
-    <h3>Ausgewählte Reparatur:</h3>
-    <p id="selected-repair">Keine Reparatur ausgewählt</p>
-    <p id="repair-cost">Kosten: 0€</p>
+<!-- Preisliste auf der rechten Seite -->
+<div class="right-section">
+    <h2>Preisliste:</h2>
+    <div class="price-list">
+        <div class="price-list-item">
+            <span>Bildschirm / Hersteller</span>
+            <span class="price">469€</span>
+        </div>
+        <div class="price-list-item">
+            <span>Original Reparatur</span>
+            <span class="price">469€</span>
+        </div>
+    </div>
+    <div class="total-section">
+        <div class="total-item">
+            <span>Zwischensumme</span>
+            <span>469€</span>
+        </div>
+        <div class="total-item">
+            <span>Kombirabatt</span>
+            <span>-</span>
+        </div>
+        <div class="total-item">
+            <span>Gesamt</span>
+            <span>469€</span>
+        </div>
+        <div class="total-item">
+            <span>umsatzsteuer befreit §19</span>
+        </div>
+        <div class="next-step">
+            Nächster Schritt: Daten und Zahlungsmethode angeben
+        </div>
+    </div>
 </div>
 
 <script>
@@ -230,12 +246,6 @@
 
     function closePopup() {
         document.getElementById('repair-popup').style.display = 'none';
-    }
-
-    function selectRepair(repairType, cost) {
-        document.getElementById('selected-repair').textContent = `${repairType} Reparatur`;
-        document.getElementById('repair-cost').textContent = `Kosten: ${cost}€`;
-        closePopup();
     }
 
     function selectColor(color) {
